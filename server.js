@@ -6,16 +6,15 @@ const bcrypt = require("bcrypt");
 const { v4: uuidv4 } = require("uuid");
 const cors = require("cors");
 
+require('dotenv').config();
+
 const app = express();
 app.use(cors({origin: 'http://localhost:3000'}));
 app.use(bodyParser.json());
 
-
-
-// Environment variables
 const PORT = process.env.PORT || 3001;
-const SECRET_KEY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const MONGO_URI = "mongodb://localhost:27017/webhooks";
+const SECRET_KEY = process.env.SECRET_KEY || "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/webhooks";
 
 // Connect to MongoDB
 mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
